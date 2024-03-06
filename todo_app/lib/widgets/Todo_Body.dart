@@ -14,7 +14,10 @@ class TodoBody extends StatelessWidget {
         const SizedBox(
           height: 50,
         ),
-        const TodoSearch(),
+        const TodoSearch(
+          Title: 'ToDo',
+          icon: Icons.search,
+        ),
         Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),

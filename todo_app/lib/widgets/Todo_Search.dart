@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 
 class TodoSearch extends StatelessWidget {
   const TodoSearch({
-    super.key,
-  });
-
+   required this.Title, required this.icon,
+  }); 
+final String Title;
+final IconData  icon;
   @override
   Widget build(BuildContext context) {
     return Row(
-      children:  [
-       const Text('ToDo',style: TextStyle(fontSize: 30,),),
+      children: [
+        Text(Title,style: const TextStyle(fontSize: 30,),),
         
         
        const Spacer(flex: 2,),
@@ -21,7 +22,7 @@ class TodoSearch extends StatelessWidget {
             color: Colors.white.withOpacity(0.05),
             borderRadius: BorderRadius.circular(16)
           ),
-          child: const Icon(Icons.search,size: 30,),
+          child:  Icon(icon,size: 30,),
         )
       ],
     );

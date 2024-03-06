@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:todo_app/widgets/CustomText.dart';
+import 'package:todo_app/widgets/Todo_Search.dart';
 
 class EditTodoBody extends StatelessWidget {
   const EditTodoBody({
@@ -8,9 +9,28 @@ class EditTodoBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text('Edit Todo'),
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 50,
+          ),
+          const TodoSearch(Title: 'Edit Todo', icon: Icons.check),
+          const SizedBox(
+            height: 16,
+          ),
+          CustomText(
+            hintText: 'Titel',
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          CustomText(
+            hintText: 'Content',
+            maxlines: 5,
+          ),
+        ],
       ),
     );
   }

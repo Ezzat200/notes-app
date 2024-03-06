@@ -19,7 +19,7 @@ const SizedBox(height: 15,),
             hintText: 'SubTitel',
             maxlines: 5,
           ),
-          SizedBox(height: 50,),
+        const  SizedBox(height: 50,),
           CustomButton(text: 'Add')
         ],
       ),

@@ -3,18 +3,19 @@ import 'package:todo_app/constans.dart';
 
 class CustomText extends StatelessWidget {
   
-  CustomText();
-
+  CustomText({this.hintText,this.maxlines=1 });
+String ?hintText;
+int ?maxlines;
   @override
   Widget build(BuildContext context) {
-    return  TextFormField(
+    return  TextField(
       
       
-     
+     maxLines: maxlines,
       decoration: InputDecoration(
         
-        hintText: 'Titel',
-        
+        hintText: hintText,
+
         hintStyle: const TextStyle(color:kPrimaryColor,fontSize: 20),
         border:  OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/cubits/cubit/add_todo_cubit_cubit.dart';
+import 'package:todo_app/cubits/add_todo_cubit/add_todo_cubit_cubit.dart';
 import 'package:todo_app/widgets/Add_Todo_Form.dart';
 
 class AddTodoBottomSheet extends StatelessWidget {
@@ -11,7 +11,7 @@ class AddTodoBottomSheet extends StatelessWidget {
     return BlocProvider(
       create: (context) => AddTodoCubitCubit(),
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding:  EdgeInsets.only(left: 16,right: 16,top: 16,bottom: MediaQuery.of(context).viewInsets.bottom),
         child: BlocConsumer<AddTodoCubitCubit, AddTodoCubitState>(
           listener: (context, state) {
             if (state is AddTodoCubitFailer) {

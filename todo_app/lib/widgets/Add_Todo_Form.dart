@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/cubits/cubit/add_todo_cubit_cubit.dart';
+import 'package:todo_app/cubits/add_todo_cubit/add_todo_cubit_cubit.dart';
+
 import 'package:todo_app/models/todo_model.dart';
 import 'package:todo_app/widgets/CustomButton.dart';
 import 'package:todo_app/widgets/CustomText.dart';
@@ -45,24 +46,27 @@ class _AddTodoFormState extends State<AddTodoForm> {
           ),
           BlocBuilder<AddTodoCubitCubit, AddTodoCubitState>(
             builder: (context, state) {
-              return CustomButton(
-                isloading: state is AddTodoCubitLoading ? true :false,
-                text: 'Add',
-                ontap: () {
-                  if (formkey.currentState!.validate()) {
-                    formkey.currentState!.save();
-                    var todoModel = TodoModel(
-                        title: title!,
-                        subTitel: subTitel!,
-                        date: DateTime.now().toString(),
-                        color: Colors.blue.value);
-                    BlocProvider.of<AddTodoCubitCubit>(context)
-                        .addtodo(todoModel);
-                  } else {
-                    autovalidateMode = AutovalidateMode.always;
-                    setState(() {});
-                  }
-                },
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: CustomButton(
+                  isloading: state is AddTodoCubitLoading ? true :false,
+                  text: 'Add',
+                  ontap: () {
+                    if (formkey.currentState!.validate()) {
+                      formkey.currentState!.save();
+                      var todoModel = TodoModel(
+                          title: title!,
+                          subTitel: subTitel!,
+                          date: DateTime.now().toString(),
+                          color: Colors.blue.value);
+                      BlocProvider.of<AddTodoCubitCubit>(context)
+                          .addtodo(todoModel);
+                    } else {
+                      autovalidateMode = AutovalidateMode.always;
+                      setState(() {});
+                    }
+                  },
+                ),
               );
             },
           )

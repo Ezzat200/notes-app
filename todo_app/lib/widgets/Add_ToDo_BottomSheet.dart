@@ -7,20 +7,62 @@ class AddTodoBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
+    return const Padding(
+      padding:  EdgeInsets.all(20),
+      child: SingleChildScrollView(
+        child: AddTodoForm(),
+      ),
+    );
+  }
+}
+
+class AddTodoForm extends StatefulWidget {
+  const AddTodoForm({
+    super.key,
+  });
+
+  @override
+  State<AddTodoForm> createState() => _AddTodoFormState();
+}
+
+class _AddTodoFormState extends State<AddTodoForm> {
+  final GlobalKey<FormState> formkey = GlobalKey ();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  String ?title ,subTitel;
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formkey,
       child: Column(
         children: [
           CustomText(
             hintText: 'Titel',
+            onSaved: (value) {
+              title =value;
+            },
           ),
-const SizedBox(height: 15,),
+      const SizedBox(height: 15,),
           CustomText(
-            hintText: 'SubTitel',
+            hintText: 'Content',
             maxlines: 5,
+            onSaved: (value) {
+             subTitel =value;
+            },
           ),
         const  SizedBox(height: 50,),
-          CustomButton(text: 'Add')
+          CustomButton(text: 'Add',
+          ontap: () {
+            if (formkey.currentState!.validate()){
+               formkey.currentState!.save();
+
+            }else{
+              autovalidateMode = AutovalidateMode.always;
+              setState(() {
+                
+              });
+            }
+          },
+          )
         ],
       ),
     );

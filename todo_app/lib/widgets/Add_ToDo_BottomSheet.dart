@@ -11,7 +11,7 @@ class AddTodoBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Padding(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: SingleChildScrollView(
         child: BlocConsumer<AddTodoCubitCubit, AddTodoCubitState>(
           listener: (context, state) {
@@ -25,7 +25,7 @@ class AddTodoBottomSheet extends StatelessWidget {
           builder: (context, state) {
             return ModalProgressHUD(
               inAsyncCall:state is AddTodoCubitLoading?true:false ,
-              child: AddTodoForm());
+              child: const AddTodoForm());
           },
         ),
       ),

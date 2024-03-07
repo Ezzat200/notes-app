@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
 
-
 class SimpleBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object? event) {
@@ -20,6 +19,16 @@ class SimpleBlocObserver extends BlocObserver {
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
     debugPrint('change = ${change}');
+  }
+
+  @override
+  void onCreate(BlocBase<dynamic> bloc) {
+    debugPrint('create = ${bloc}');
+  }
+
+  @override
+  void onClose(BlocBase<dynamic> bloc) {
+    debugPrint('close = ${bloc}');
   }
 
   @override

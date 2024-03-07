@@ -1,69 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/widgets/CustomButton.dart';
-import 'package:todo_app/widgets/CustomText.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:todo_app/cubits/cubit/add_todo_cubit_cubit.dart';
+import 'package:todo_app/widgets/Add_Todo_Form.dart';
+
 
 class AddTodoBottomSheet extends StatelessWidget {
   const AddTodoBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding:  EdgeInsets.all(20),
+    return  Padding(
+      padding: EdgeInsets.all(20),
       child: SingleChildScrollView(
-        child: AddTodoForm(),
-      ),
-    );
-  }
-}
-
-class AddTodoForm extends StatefulWidget {
-  const AddTodoForm({
-    super.key,
-  });
-
-  @override
-  State<AddTodoForm> createState() => _AddTodoFormState();
-}
-
-class _AddTodoFormState extends State<AddTodoForm> {
-  final GlobalKey<FormState> formkey = GlobalKey ();
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String ?title ,subTitel;
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: formkey,
-      child: Column(
-        children: [
-          CustomText(
-            hintText: 'Titel',
-            onSaved: (value) {
-              title =value;
-            },
-          ),
-      const SizedBox(height: 15,),
-          CustomText(
-            hintText: 'Content',
-            maxlines: 5,
-            onSaved: (value) {
-             subTitel =value;
-            },
-          ),
-        const  SizedBox(height: 50,),
-          CustomButton(text: 'Add',
-          ontap: () {
-            if (formkey.currentState!.validate()){
-               formkey.currentState!.save();
-
-            }else{
-              autovalidateMode = AutovalidateMode.always;
-              setState(() {
-                
-              });
+        child: BlocConsumer<AddTodoCubitCubit, AddTodoCubitState>(
+          listener: (context, state) {
+            if(state is AddTodoCubitFailer){
+              print('failed ${state.errorMessage}');
+            }
+            if(state is AddTodoCubitSuccess){
+              Navigator.pop(context);
             }
           },
-          )
-        ],
+          builder: (context, state) {
+            return ModalProgressHUD(
+              inAsyncCall:state is AddTodoCubitLoading?true:false ,
+              child: AddTodoForm());
+          },
+        ),
       ),
     );
   }

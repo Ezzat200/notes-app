@@ -43,21 +43,27 @@ class _AddTodoFormState extends State<AddTodoForm> {
           const SizedBox(
             height: 50,
           ),
-          CustomButton(
-            text: 'Add',
-            ontap: () {
-              if (formkey.currentState!.validate()) {
-                formkey.currentState!.save();
-                var todoModel = TodoModel(
-                    title: title!,
-                    subTitel: subTitel!,
-                    date: DateTime.now().toString(),
-                    color: Colors.blue.value);
-                BlocProvider.of<AddTodoCubitCubit>(context).addtodo(todoModel);
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-                setState(() {});
-              }
+          BlocBuilder<AddTodoCubitCubit, AddTodoCubitState>(
+            builder: (context, state) {
+              return CustomButton(
+                isloading: state is AddTodoCubitLoading ? true :false,
+                text: 'Add',
+                ontap: () {
+                  if (formkey.currentState!.validate()) {
+                    formkey.currentState!.save();
+                    var todoModel = TodoModel(
+                        title: title!,
+                        subTitel: subTitel!,
+                        date: DateTime.now().toString(),
+                        color: Colors.blue.value);
+                    BlocProvider.of<AddTodoCubitCubit>(context)
+                        .addtodo(todoModel);
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
+              );
             },
           )
         ],

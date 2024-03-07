@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:todo_app/cubits/cubit/add_todo_cubit_cubit.dart';
 import 'package:todo_app/widgets/Add_Todo_Form.dart';
 
@@ -23,9 +22,7 @@ class AddTodoBottomSheet extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            return ModalProgressHUD(
-                inAsyncCall: state is AddTodoCubitLoading ? true : false,
-                child: const SingleChildScrollView(child: AddTodoForm()));
+            return const SingleChildScrollView(child: AddTodoForm());
           },
         ),
       ),

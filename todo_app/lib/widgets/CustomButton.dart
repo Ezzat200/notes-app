@@ -5,8 +5,9 @@ import 'package:todo_app/constans.dart';
 class CustomButton extends StatelessWidget {
    CustomButton( {
     required this.text,
-    this.ontap
+    this.ontap,  this.isloading=false
    });
+   final bool isloading;
 String text;
 VoidCallback?ontap;
   @override
@@ -22,7 +23,14 @@ onTap: ontap,
               
         ),
               
-        child: Center(child: Text( text,
+        child: Center(child: 
+        isloading? const SizedBox(
+          height: 24,
+          width: 24,
+          child: CircularProgressIndicator(
+            color: Colors.black,
+          )):
+        Text( text,
         
         style: const TextStyle(fontSize: 20,color: Colors.black),)),
       ),
